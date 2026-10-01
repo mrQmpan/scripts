@@ -1,317 +1,233 @@
-{
-  "log": {
-    "level": "info",
-    "timestamp": true
-  },
-  "dns": {
-    "servers": [
-      {
-        "tag": "dns_main_tls",
-        "address": "tls://msk.mrqmpan.ru",
-        "port": 853,
-        "detour": "direct"
-      },
-      {
-        "tag": "dns_main_doh",
-        "address": "https://mrqmpan.ru",
-        "detour": "direct"
-      }
-    ],
-    "rules": [
-      {
-        "outbound": "any",
-        "server": "dns_main_tls"
-      }
-    ],
-    "final": "dns_main_tls",
-    "strategy": "ipv4_only"
-  },
-  "inbounds": [
-    {
-      "type": "tun",
-      "tag": "tun-in",
-      "interface_name": "tun0",
-      "inet4_address": "172.19.0.1/30",
-      "auto_route": true,
-      "strict_route": true,
-      "stack": "gvisor",
-      "sniff": true
-    }
-  ],
-  "outbounds": [
-    {
-      "type": "direct",
-      "tag": "direct"
-    },
-    {
-      "type": "dns",
-      "tag": "dns-out"
-    },
-    {
-      "type": "selector",
-      "tag": "FAST SERVER",
-      "outbounds": [
-        "direct"
-      ]
-    },
-    {
-      "type": "selector",
-      "tag": "HOME KEENETIC",
-      "outbounds": [
-        "direct"
-      ]
-    }
-  ],
-  "route": {
-    "rules": [
-      {
-        "protocol": "dns",
-        "outbound": "dns-out"
-      },
-      {
-        "domain_suffix": [
-          "2ip.io",
-          "cdn-telegram.org",
-          "comments.app",
-          "contest.com",
-          "fragment.com",
-          "graph.org",
-          "quiz.directory",
-          "t.me",
-          "tdesktop.com",
-          "telega.one",
-          "telegra.ph",
-          "telegram-cdn.org",
-          "telegram.dog",
-          "telegram.me",
-          "telegram.org",
-          "telegram.com",
-          "telegram.space",
-          "telesco.pe",
-          "tg.dev",
-          "ton.org",
-          "tx.me",
-          "usercontent.dev",
-          "legra.ph",
-          "api.imem.app",
-          "api.swiftgram.app",
-          "mbrx.app",
-          "stel.com",
-          "telegramdownload.com",
-          "ggpht.cn",
-          "ggpht.com",
-          "google.com",
-          "googleapis.com",
-          "googleusercontent.com",
-          "googlevideo.com",
-          "gstatic.com",
-          "gvt1.com",
-          "returnyoutubedislikeapi.com",
-          "withyoutube.com",
-          "youtu.be",
-          "youtube-nocookie.com",
-          "youtube.ru",
-          "youtubeeducation.com",
-          "youtubefanfest.com",
-          "youtubegaming.com",
-          "youtubego.co.id",
-          "youtubego.co.in",
-          "youtubego.com",
-          "youtubego.com.br",
-          "youtubego.id",
-          "youtubego.in",
-          "youtubekids.com",
-          "youtubemobilesupport.com",
-          "yt.be",
-          "ytimg.com",
-          "cdn32.lol",
-          "cdntogo.net",
-          "kinozal.me",
-          "kinozal.tv",
-          "lostfilm.run",
-          "lostfilm.tv",
-          "lostfilm.win",
-          "phncdn.com",
-          "plab.site",
-          "pornhub.com",
-          "pornolab.net",
-          "wstracker.online",
-          "gfw.ovh",
-          "mos-gorsud.site",
-          "gravatar.com",
-          "cloudflareinsights.com",
-          "gstatic.com",
-          "kino.pub",
-          "kinopub.online",
-          "iptv.online",
-          "cdn4t.xyz",
-          "smarttv.zeasn.tv",
-          "pushbr.com",
-          "pushbr.com",
-          "service-kp.com",
-          "api.alador.space",
-          "wp.com",
-          "cdn2site.com",
-          "digital-cdn.net",
-          "cdn2cdn.com",
-          "srvkp.com",
-          "api.ios-kp.store",
-          "cdn-service.space",
-          "bunkr.cr",
-          "bunkr.si",
-          "scdn.st",
-          "mega.io",
-          "mega.nz",
-          "mega.co.nz",
-          "maintracker.org",
-          "rutracker.cc",
-          "rutracker.cr",
-          "rutracker.me",
-          "rutracker.nl",
-          "rutracker.org",
-          "rutrecker.net",
-          "rutrk.org",
-          "achat-followers-instagram.com",
-          "acheter-followers-instagram.com",
-          "acheterdesfollowersinstagram.com",
-          "acheterfollowersinstagram.com",
-          "bookstagram.com",
-          "carstagram.com",
-          "cdninstagram.com",
-          "chickstagram.com",
-          "ig.me",
-          "igcdn.com",
-          "igsonar.com",
-          "igtv.com",
-          "imstagram.com",
-          "imtagram.com",
-          "instaadder.com",
-          "instachecker.com",
-          "instafallow.com",
-          "instafollower.com",
-          "instagainer.com",
-          "instagda.com",
-          "instagify.com",
-          "instagmania.com",
-          "instagor.com",
-          "instagram-brand.com",
-          "instagram-engineering.com",
-          "instagram-help.com",
-          "instagram-press.com",
-          "instagram-press.net",
-          "instagram.com",
-          "instagramci.com",
-          "instagramcn.com",
-          "instagramdi.com",
-          "instagramhashtags.net",
-          "instagramhilecim.com",
-          "instagramhilesi.org",
-          "instagramium.com",
-          "instagramizlenme.com",
-          "instagramkusu.com",
-          "instagramlogin.com",
-          "instagramm.com",
-          "instagramn.com",
-          "instagrampartners.com",
-          "instagramphoto.com",
-          "instagramq.com",
-          "instagramsepeti.com",
-          "instagramtakipcisatinal.net",
-          "instagramtakiphilesi.com",
-          "instagramtips.com",
-          "instagramtr.com",
-          "instagran.com",
-          "instagranm.com",
-          "instagrem.com",
-          "instagrm.com",
-          "instagtram.com",
-          "instagy.com",
-          "instamgram.com",
-          "instangram.com",
-          "instanttelegram.com",
-          "instaplayer.net",
-          "instastyle.tv",
-          "instgram.com",
-          "intagram.com",
-          "intagrm.com",
-          "intgram.com",
-          "kingstagram.com",
-          "lnstagram-help.com",
-          "theinstagramhack.com",
-          "oninstagram.com",
-          "online-instagram.com",
-          "onlineinstagram.com",
-          "web-instagram.net",
-          "wwwinstagram.com",
-          "facebook.com",
-          "fbcdn.net",
-          "fbsbx.com",
-          "wa.me",
-          "whatsapp-plus.info",
-          "whatsapp-plus.me",
-          "whatsapp-plus.net",
-          "whatsapp.biz",
-          "whatsapp.cc",
-          "whatsapp.com",
-          "whatsapp.info",
-          "whatsapp.net",
-          "whatsapp.org",
-          "whatsapp.tv",
-          "whatsappbrand.com",
-          "wl.co"
-        ],
-        "ip_cidr": [
-          "8.0.0.0/13",
-          "8.32.0.0/11",
-          "18.128.0.0/9",
-          "34.64.0.0/10",
-          "34.192.0.0/10",
-          "35.184.0.0/13",
-          "35.224.0.0/12",
-          "35.240.0.0/13",
-          "40.96.0.0/12",
-          "44.192.0.0/10",
-          "50.128.0.0/9",
-          "52.96.0.0/12",
-          "64.233.160.0/19",
-          "66.151.176.0/20",
-          "74.125.0.0/16",
-          "91.105.192.0/23",
-          "91.108.4.0/22",
-          "91.108.8.0/22",
-          "91.108.12.0/22",
-          "91.108.16.0/22",
-          "91.108.20.0/22",
-          "91.108.56.0/22",
-          "92.204.208.0/20",
-          "95.161.64.0/20",
-          "100.24.0.0/13",
-          "104.16.0.0/12",
-          "108.177.0.0/17",
-          "132.245.0.0/16",
-          "142.250.0.0/15",
-          "146.75.0.0/16",
-          "149.154.160.0/20",
-          "151.101.0.0/16",
-          "170.149.0.0/16",
-          "172.64.0.0/13",
-          "172.217.0.0/16",
-          "172.253.0.0/16",
-          "173.194.0.0/16",
-          "174.143.0.0/16",
-          "178.128.240.0/20",
-          "185.76.151.0/24",
-          "188.166.0.0/17",
-          "192.178.0.0/15",
-          "199.232.0.0/16",
-          "204.212.0.0/14",
-          "209.85.128.0/17",
-          "209.97.0.0/18",
-          "216.58.192.0/19"
-        ],
-        "outbound": "FAST SERVER"
-      }
-    ],
-    "final": "direct"
-  }
-}
+2ip.io
+cdn-telegram.org
+comments.app
+contest.com
+fragment.com
+graph.org
+quiz.directory
+t.me
+tdesktop.com
+telega.one
+telegra.ph
+telegram-cdn.org
+telegram.dog
+telegram.me
+telegram.org
+telegram.com
+telegram.space
+telesco.pe
+tg.dev
+ton.org
+tx.me
+usercontent.dev
+legra.ph
+api.imem.app
+api.swiftgram.app
+mbrx.app
+stel.com
+telegramdownload.com
+ggpht.cn
+ggpht.com
+google.com
+googleapis.com
+googleusercontent.com
+googlevideo.com
+gstatic.com
+gvt1.com
+returnyoutubedislikeapi.com
+withyoutube.com
+youtu.be
+youtube-nocookie.com
+youtube.ru
+youtubeeducation.com
+youtubefanfest.com
+youtubegaming.com
+youtubego.co.id
+youtubego.co.in
+youtubego.com
+youtubego.com.br
+youtubego.id
+youtubego.in
+youtubekids.com
+youtubemobilesupport.com
+yt.be
+ytimg.com
+cdn32.lol
+cdntogo.net
+kinozal.me
+kinozal.tv
+lostfilm.run
+lostfilm.tv
+lostfilm.win
+plab.site
+wstracker.online
+gfw.ovh
+mos-gorsud.site
+gravatar.com
+cloudflareinsights.com
+gstatic.com
+kino.pub
+kinopub.online
+iptv.online
+cdn4t.xyz
+smarttv.zeasn.tv
+pushbr.com
+pushbr.com
+service-kp.com
+api.alador.space
+wp.com
+cdn2site.com
+digital-cdn.net
+cdn2cdn.com
+srvkp.com
+api.ios-kp.store
+cdn-service.space
+bunkr.cr
+bunkr.si
+scdn.st
+mega.io
+mega.nz
+mega.co.nz
+maintracker.org
+rutracker.cc
+rutracker.cr
+rutracker.me
+rutracker.nl
+rutracker.org
+rutrecker.net
+rutrk.org
+achat-followers-instagram.com
+acheter-followers-instagram.com
+acheterdesfollowersinstagram.com
+acheterfollowersinstagram.com
+bookstagram.com
+carstagram.com
+cdninstagram.com
+chickstagram.com
+ig.me
+igcdn.com
+igsonar.com
+igtv.com
+imstagram.com
+imtagram.com
+instaadder.com
+instachecker.com
+instafallow.com
+instafollower.com
+instagainer.com
+instagda.com
+instagify.com
+instagmania.com
+instagor.com
+instagram-brand.com
+instagram-engineering.com
+instagram-help.com
+instagram-press.com
+instagram-press.net
+instagram.com
+instagramci.com
+instagramcn.com
+instagramdi.com
+instagramhashtags.net
+instagramhilecim.com
+instagramhilesi.org
+instagramium.com
+instagramizlenme.com
+instagramkusu.com
+instagramlogin.com
+instagramm.com
+instagramn.com
+instagrampartners.com
+instagramphoto.com
+instagramq.com
+instagramsepeti.com
+instagramtakipcisatinal.net
+instagramtakiphilesi.com
+instagramtips.com
+instagramtr.com
+instagran.com
+instagranm.com
+instagrem.com
+instagrm.com
+instagtram.com
+instagy.com
+instamgram.com
+instangram.com
+instanttelegram.com
+instaplayer.net
+instastyle.tv
+instgram.com
+intagram.com
+intagrm.com
+intgram.com
+kingstagram.com
+lnstagram-help.com
+theinstagramhack.com
+oninstagram.com
+online-instagram.com
+onlineinstagram.com
+web-instagram.net
+wwwinstagram.com
+facebook.com
+fbcdn.net
+fbsbx.com
+wa.me
+whatsapp-plus.info
+whatsapp-plus.me
+whatsapp-plus.net
+whatsapp.biz
+whatsapp.cc
+whatsapp.com
+whatsapp.info
+whatsapp.net
+whatsapp.org
+whatsapp.tv
+whatsappbrand.com
+wl.co
+8.0.0.0/13
+8.32.0.0/11
+18.128.0.0/9
+34.64.0.0/10
+34.192.0.0/10
+35.184.0.0/13
+35.224.0.0/12
+35.240.0.0/13
+40.96.0.0/12
+44.192.0.0/10
+50.128.0.0/9
+52.96.0.0/12
+64.233.160.0/19
+66.151.176.0/20
+74.125.0.0/16
+91.105.192.0/23
+91.108.4.0/22
+91.108.8.0/22
+91.108.12.0/22
+91.108.16.0/22
+91.108.20.0/22
+91.108.56.0/22
+92.204.208.0/20
+95.161.64.0/20
+100.24.0.0/13
+104.16.0.0/12
+108.177.0.0/17
+132.245.0.0/16
+142.250.0.0/15
+146.75.0.0/16
+149.154.160.0/20
+151.101.0.0/16
+170.149.0.0/16
+172.64.0.0/13
+172.217.0.0/16
+172.253.0.0/16
+173.194.0.0/16
+174.143.0.0/16
+178.128.240.0/20
+185.76.151.0/24
+188.166.0.0/17
+192.178.0.0/15
+199.232.0.0/16
+204.212.0.0/14
+209.85.128.0/17
+209.97.0.0/18
+216.58.192.0/19
